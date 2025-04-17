@@ -1,0 +1,10 @@
+#genres span{
+  color:white;
+  padding:10px 20px;
+  transition:color 0.5s ease;
+  background-color:rgb(5,5,5);
+}
+#genres span:hover{
+  color:red;
+  cursor:pointer;
+}

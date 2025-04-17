@@ -1,0 +1,102 @@
+.containerr{
+	margin:auto;
+    width:100%;
+    background-color: rgb(34, 32, 32);
+    text-align: center;
+}
+
+.containerr video{
+    width:90%;
+    aspect-ratio: 16/9;
+    text-align: center;
+    margin: auto;
+}
+
+#episodeDetails{
+    width:100%;
+    height: auto;
+    background-color: red;
+}
+
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 20px;
+    right: 10px;
+    bottom: 0;
+  }
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(253, 3, 3, 0.1);
+    border-top-color: #f80a0a;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  #episodeDetails{
+    height:auto;
+    background-color: rgb(34, 32, 32);
+    color:white;
+    position: relative;
+    left:10px;
+    top:10px;
+  }
+  #info{
+    width:95%;
+    margin: auto;
+  }
+  .episodeDetails{
+    text-align: left;
+    position: absolute;
+    left:10px;
+    top:5px;
+  }
+
+  #span span{
+    color:white;  
+    transition: color 0.5s ease;
+    background-color: rgb(20,20,20);
+
+  }
+  #span span:hover{
+    color:red;
+    cursor: pointer;
+  }
+
+  .btn_pag:hover{
+    background-color: rgb(20,20,20);
+    cursor: pointer;
+  }
+  .btn_pag{
+    color:white;
+    padding:8px 12px;
+    margin-right:5px;
+    background-color:rgb(10,10,10);
+    border:none;
+    border-radius:5px;
+  }
+
+  @media screen and (max-width: 400px) {
+    #eps {
+      order: 1;
+    }
+    
+    /* Adjust styles for smaller elements */
+    #span {
+      order:2;    }
+  }
+
+  .infos span{
+    margin-bottom: 20px;
+  }
+  
