@@ -27,7 +27,7 @@ const Watch = forwardRef((props, ref) => {
         'X-Requested-With': 'https://animetstream.vercel.app/'
       },
       data: {
-        url: `https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=dub`
+        url: `https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&category=sub`
       }
     }
 const response2 = await axios.request(options);
