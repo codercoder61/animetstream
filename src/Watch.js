@@ -20,7 +20,7 @@ const Watch = forwardRef((props, ref) => {
       method: 'GET',
       url: 'https://http-cors-proxy.p.rapidapi.com/',
       headers: {
-        'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
+        'x-rapidapi-key': 'c1de154fd6msh774b48b6e0df220p10a1d1jsn5892d7c3a158',
         'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
         'Content-Type': 'application/json',
         Origin: 'https://animetstream.vercel.app/',
@@ -146,7 +146,7 @@ const player = new Plyr('#player');
           method: 'GET',
           url: 'https://http-cors-proxy.p.rapidapi.com/',
           headers: {
-            'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
+            'x-rapidapi-key': 'c1de154fd6msh774b48b6e0df220p10a1d1jsn5892d7c3a158',
             'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
             'Content-Type': 'application/json',
             Origin: 'https://animetstream.vercel.app/',
