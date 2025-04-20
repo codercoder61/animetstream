@@ -26,7 +26,7 @@ function Overlay(props) {
         'X-Requested-With': 'https://animetstream.vercel.app/'
       },
       data: {
-        url: `https://anime-brown-three.vercel.app/api/v2/hianime/search?q=${query}`
+        url: `https://anime-alpha-indol.vercel.app/api/v2/hianime/search?q=${query}`
       }
     }
 const response2 = await axios.request(options);
