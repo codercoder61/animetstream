@@ -17,7 +17,7 @@ const Watch = forwardRef((props, ref) => {
 	//console.log(episodeId)	
 	try {
     const options = {
-      method: 'POST',
+      method: 'GET',
       url: 'https://http-cors-proxy.p.rapidapi.com/',
       headers: {
         'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
@@ -143,7 +143,7 @@ const player = new Plyr('#player');
 
         // Fetch episode sources (post request)
         const options = {
-          method: 'POST',
+          method: 'GET',
           url: 'https://http-cors-proxy.p.rapidapi.com/',
           headers: {
             'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
