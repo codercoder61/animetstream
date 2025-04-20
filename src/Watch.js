@@ -27,12 +27,12 @@ const Watch = forwardRef((props, ref) => {
         'X-Requested-With': 'https://animetstream.vercel.app/'
       },
       data: {
-        url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=dub`
+        url: `https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=dub`
       }
     }
 const response2 = await axios.request(options);
 //console.log(response2.data);
-      const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
+      const videoUrl = "https://hianime-proxy-one.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
 
       if (Hls.isSupported()) {
         let hls = new Hls();
@@ -97,7 +97,7 @@ const player = new Plyr('#player');
   },[isLoading])
   useEffect(() => {
     async function fetchData() {
-      res = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}`);
+      res = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-alpha-indol.vercel.app/api/v2/hianime/anime/${animeId}`);
     //console.log(res)
     setPoster(res.data.data.anime.info.poster)
     setTitle(res.data.data.anime.info.name)
@@ -135,7 +135,7 @@ const player = new Plyr('#player');
     let hls
     const fetchEpisodes = async () => {
       try {
-        const response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
+        const response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-alpha-indol.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
         //console.log(response);
         const episodeData = response.data.data.episodes;
         setEpisodes(episodeData);
@@ -153,14 +153,14 @@ const player = new Plyr('#player');
             'X-Requested-With': 'https://animetstream.vercel.app/'
           },
           data: {
-            url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeData[0].episodeId}&server=hd-1&category=dub`
+            url: `https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeData[0].episodeId}&server=hd-1&category=dub`
           }
         };
 
         const response2 = await axios.request(options);
         //console.log(response2.data);
 
-        const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
+        const videoUrl = "https://hianime-proxy-one.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
         //console.log("Video URL: ", videoUrl);
 
         if (Hls.isSupported()) {
