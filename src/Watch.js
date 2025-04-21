@@ -17,7 +17,7 @@ const Watch = forwardRef((props, ref) => {
 	//console.log(episodeId)	
 	try {
    
-const response2 = await axios.post('https://proxy-production-ddb5.up.railway.app/fetch-url', `https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=dub`);
+const response2 = await axios.post('https://proxy-production-ddb5.up.railway.app/fetch-url',{url:`https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=dub`});
 
 console.log(response2);
       const videoUrl = "https://hianime-proxy-one.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
@@ -131,7 +131,7 @@ const player = new Plyr('#player');
 
         // Fetch episode sources (post request)
         
-const response2 = await axios.post('https://proxy-production-ddb5.up.railway.app/fetch-url', `https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeData[0].episodeId}&server=hd-1&category=dub`);
+const response2 = await axios.post('https://proxy-production-ddb5.up.railway.app/fetch-url', {url:`https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeData[0].episodeId}&server=hd-1&category=dub`});
         console.log(response2);
 
         const videoUrl = "https://hianime-proxy-one.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
