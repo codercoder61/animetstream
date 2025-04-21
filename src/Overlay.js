@@ -18,7 +18,8 @@ function Overlay(props) {
    
 const response2 = await axios.post('https://proxy-production-ddb5.up.railway.app/fetch-url',{url:`https://anime-alpha-indol.vercel.app/api/v2/hianime/search?q=${query}`});
 //console.log(response2.data.data.animes);
-setAnimes(response2.data.data.animes)
+        console.log(response2)
+setAnimes(response2.data.content.data.animes)
 } catch (error) {
   console.error('Error fetching video sources:', error);
 }}
