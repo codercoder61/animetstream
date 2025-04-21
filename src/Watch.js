@@ -16,23 +16,10 @@ const Watch = forwardRef((props, ref) => {
 	setSpinner(true)
 	//console.log(episodeId)	
 	try {
-    const options = {
-      method: 'GET',
-      url: 'https://http-cors-proxy.p.rapidapi.com/',
-      headers: {
-        'x-rapidapi-key': 'c1de154fd6msh774b48b6e0df220p10a1d1jsn5892d7c3a158',
-        'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
-        'Content-Type': 'application/json',
-        Origin: 'https://animetstream.vercel.app/',
-        'X-Requested-With': 'https://animetstream.vercel.app/'
-      },
-      data: {
-        url: 
-      }
-    }
+   
 const response2 = await axios.post('https://proxy-production-ddb5.up.railway.app/fetch-url', `https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=dub`);
 
-//console.log(response2.data);
+console.log(response2);
       const videoUrl = "https://hianime-proxy-one.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
 
       if (Hls.isSupported()) {
@@ -143,23 +130,9 @@ const player = new Plyr('#player');
         setTotalEpisodes(episodeData.length);
 
         // Fetch episode sources (post request)
-        const options = {
-          method: 'GET',
-          url: 'https://http-cors-proxy.p.rapidapi.com/',
-          headers: {
-            'x-rapidapi-key': 'c1de154fd6msh774b48b6e0df220p10a1d1jsn5892d7c3a158',
-            'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
-            'Content-Type': 'application/json',
-            Origin: 'https://animetstream.vercel.app/',
-            'X-Requested-With': 'https://animetstream.vercel.app/'
-          },
-          data: {
-            url: `https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeData[0].episodeId}&category=sub`
-          }
-        };
-
-        const response2 = await axios.request(options);
-        //console.log(response2.data);
+        
+const response2 = await axios.post('https://proxy-production-ddb5.up.railway.app/fetch-url', `https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeData[0].episodeId}&server=hd-1&category=dub`);
+        console.log(response2);
 
         const videoUrl = "https://hianime-proxy-one.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
         //console.log("Video URL: ", videoUrl);
