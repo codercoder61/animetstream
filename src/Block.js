@@ -29,15 +29,15 @@ function Block(props) {
   };
 
   const handleClick3 = ()=>{
-        fetchData('https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/home')
+        fetchData('https://proxy-ryan.vercel.app/cors?url=https://anime-alpha-indol.vercel.app/api/v2/hianime/home')
   }
   const handleClick4 = ()=>{
-        fetchData2('https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/home')
+        fetchData2('https://proxy-ryan.vercel.app/cors?url=https://anime-alpha-indol.vercel.app/api/v2/hianime/home')
   }
   useEffect(() => {
 
 
-    fetchData('https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/home')
+    fetchData('https://proxy-ryan.vercel.app/cors?url=https://anime-alpha-indol.vercel.app/api/v2/hianime/home')
     
     
   }, []);

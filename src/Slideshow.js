@@ -31,7 +31,7 @@ const plusSlides=(n) =>{
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/home`);
+        const response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-alpha-indol.vercel.app/api/v2/hianime/home`);
         console.log(response)
         setAnimes(response.data.data.mostPopularAnimes || []);
       } catch (error) {

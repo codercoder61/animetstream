@@ -11,29 +11,18 @@ const pageSize = 10; // Number of items per page
 
 const Watch = forwardRef((props, ref) => {
 
+const track = useRef(null);
 
 	const fetchEpisodeSources = async (episodeId) => {
 	setSpinner(true)
 	//console.log(episodeId)	
 	try {
-    const options = {
-      method: 'POST',
-      url: 'https://http-cors-proxy.p.rapidapi.com/',
-      headers: {
-        'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
-        'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
-        'Content-Type': 'application/json',
-        Origin: 'https://animetstream.vercel.app/',
-        'X-Requested-With': 'https://animetstream.vercel.app/'
-      },
-      data: {
-        url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=dub`
-      }
-    }
-const response2 = await axios.request(options);
-//console.log(response2.data);
-      const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
+   
+const response2 = await axios.post('https://proxy-production-ddb5.up.railway.app/fetch-url',{url:`https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub`});
 
+console.log(response2);
+      const videoUrl = "https://hianimeproxy-production.up.railway.app/m3u8-proxy?url=" + response2.data.content.data.sources[0].url;
+track.current.src = "https://proxyvtt-production.up.railway.app/proxy?url="+response2.data.content.data.tracks[0].file
       if (Hls.isSupported()) {
         let hls = new Hls();
         hls.loadSource(videoUrl);
@@ -97,7 +86,7 @@ const player = new Plyr('#player');
   },[isLoading])
   useEffect(() => {
     async function fetchData() {
-      res = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}`);
+      res = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-alpha-indol.vercel.app/api/v2/hianime/anime/${animeId}`);
     //console.log(res)
     setPoster(res.data.data.anime.info.poster)
     setTitle(res.data.data.anime.info.name)
@@ -135,33 +124,20 @@ const player = new Plyr('#player');
     let hls
     const fetchEpisodes = async () => {
       try {
-        const response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-brown-three.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
+        const response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-alpha-indol.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
         //console.log(response);
         const episodeData = response.data.data.episodes;
         setEpisodes(episodeData);
         setTotalEpisodes(episodeData.length);
 
         // Fetch episode sources (post request)
-        const options = {
-          method: 'POST',
-          url: 'https://http-cors-proxy.p.rapidapi.com/',
-          headers: {
-            'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
-            'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
-            'Content-Type': 'application/json',
-            Origin: 'https://animetstream.vercel.app/',
-            'X-Requested-With': 'https://animetstream.vercel.app/'
-          },
-          data: {
-            url: `https://anime-brown-three.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeData[0].episodeId}&server=hd-1&category=dub`
-          }
-        };
+        
+const response2 = await axios.post('https://proxy-production-ddb5.up.railway.app/fetch-url', {url:`https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeData[0].episodeId}&server=hd-1&category=sub`});
+        console.log(response2);
 
-        const response2 = await axios.request(options);
-        //console.log(response2.data);
-
-        const videoUrl = "https://hianime-proxy-omega.vercel.app/m3u8-proxy?url=" + response2.data.data.sources[0].url;
+        const videoUrl = "https://hianimeproxy-production.up.railway.app/m3u8-proxy?url=" + response2.data.content.data.sources[0].url;
         //console.log("Video URL: ", videoUrl);
+track.current.src = "https://proxyvtt-production.up.railway.app/proxy?url="+response2.data.content.data.tracks[0].file
 
         if (Hls.isSupported()) {
           hls = new Hls();
@@ -240,7 +216,14 @@ const player = new Plyr('#player');
          
 
 	  <video src="" id="player" ref={videoRef} controls>
-	  
+	  <track
+        src=""
+ref={track}
+        kind="subtitles"
+        srcLang="en"
+        label="English"
+        default
+      />
 	</video>
          
           <div ref={spinnerRef} className="spinner-container">

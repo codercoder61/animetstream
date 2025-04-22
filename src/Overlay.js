@@ -15,23 +15,11 @@ function Overlay(props) {
       
       	
       try {
-    const options = {
-      method: 'POST',
-      url: 'https://http-cors-proxy.p.rapidapi.com/',
-      headers: {
-        'x-rapidapi-key': '2e4139dc3fmshfb131a66e36aa23p1bbef1jsncf62aca0e0bd',
-        'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
-        'Content-Type': 'application/json',
-        Origin: 'https://animetstream.vercel.app/',
-        'X-Requested-With': 'https://animetstream.vercel.app/'
-      },
-      data: {
-        url: `https://anime-brown-three.vercel.app/api/v2/hianime/search?q=${query}`
-      }
-    }
-const response2 = await axios.request(options);
+   
+const response2 = await axios.post('https://proxy-production-ddb5.up.railway.app/fetch-url',{url:`https://anime-alpha-indol.vercel.app/api/v2/hianime/search?q=${query}`});
 //console.log(response2.data.data.animes);
-setAnimes(response2.data.data.animes)
+        console.log(response2)
+setAnimes(response2.data.content.data.animes)
 } catch (error) {
   console.error('Error fetching video sources:', error);
 }}
