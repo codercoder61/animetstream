@@ -22,7 +22,7 @@ const response2 = await axios.post('https://proxy-production-ddb5.up.railway.app
 
 console.log(response2);
       const videoUrl = "https://hianimeproxy-production.up.railway.app/m3u8-proxy?url=" + response2.data.content.data.sources[0].url;
-track.current.src = response2.data.content.data.tracks[0].file
+track.current.src = "https://proxy-ryan.vercel.app/cors?url="+response2.data.content.data.tracks[0].file
       if (Hls.isSupported()) {
         let hls = new Hls();
         hls.loadSource(videoUrl);
@@ -137,7 +137,7 @@ const response2 = await axios.post('https://proxy-production-ddb5.up.railway.app
 
         const videoUrl = "https://hianimeproxy-production.up.railway.app/m3u8-proxy?url=" + response2.data.content.data.sources[0].url;
         //console.log("Video URL: ", videoUrl);
-track.current.src = response2.data.content.data.tracks[0].file
+track.current.src = "https://proxy-ryan.vercel.app/cors?url="+response2.data.content.data.tracks[0].file
 
         if (Hls.isSupported()) {
           hls = new Hls();
