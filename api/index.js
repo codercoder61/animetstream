@@ -1,26 +1,23 @@
-// /pages/api/proxy.js
-import axios from 'axios';
-
 export default async function handler(req, res) {
-  const { url } = req.body;  // Get the URL from query parameters
-  if (!url) {
-    return res.status(400).send('Missing URL parameter');
+  const subtitleUrl = req.query.url;
+
+  // Basic validation: Only allow .vtt files from megastatics.com
+  if (
+    !subtitleUrl ||
+    !subtitleUrl.startsWith('https://s.megastatics.com/') ||
+    !subtitleUrl.endsWith('.vtt')
+  ) {
+    return res.status(400).json({ error: 'Invalid or missing subtitle URL' });
   }
 
   try {
-    const response = await axios.get(url, {
-      responseType: 'stream',  // Stream the file data
-      headers: {
-        'User-Agent': 'Mozilla/5.0',  // Optional: Mimic browser user-agent
-        'Accept': 'text/vtt',  // Specify that you're expecting a subtitle file (VTT)
-      },
-    });
+    const response = await fetch(subtitleUrl);
+    const text = await response.text();
 
-    res.setHeader('Access-Control-Allow-Origin', '*');  // CORS headers
-    res.setHeader('Content-Type', 'text/vtt');  // Set the content type as VTT
-    response.data.pipe(res);  // Pipe the data to the response
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Content-Type', 'text/vtt');
+    res.status(200).send(text);
   } catch (err) {
-    console.error('Proxy error:', err);
-    res.status(500).send('Error while fetching the subtitle');
+    res.status(500).json({ error: 'Failed to fetch subtitle file' });
   }
 }
