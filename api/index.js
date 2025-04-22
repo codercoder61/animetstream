@@ -1,32 +1,26 @@
-const express = require('express');
-const axios = require('axios');
-const cors = require('cors');
-const app = express();
-const PORT = 3001;
+// /pages/api/proxy.js
+import axios from 'axios';
 
-app.use(cors());
-
-app.get('/proxy', async (req, res) => {
-  const { url } = req.query;
-  if (!url) return res.status(400).send('Missing URL');
+export default async function handler(req, res) {
+  const { url } = req.query;  // Get the URL from query parameters
+  if (!url) {
+    return res.status(400).send('Missing URL parameter');
+  }
 
   try {
     const response = await axios.get(url, {
-      responseType: 'stream',
+      responseType: 'stream',  // Stream the file data
       headers: {
-        'User-Agent': 'Mozilla/5.0',
-        'Accept': 'text/vtt',
+        'User-Agent': 'Mozilla/5.0',  // Optional: Mimic browser user-agent
+        'Accept': 'text/vtt',  // Specify that you're expecting a subtitle file (VTT)
       },
     });
 
-    res.set('Content-Type', 'text/vtt');
-    response.data.pipe(res);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send('Proxy error');
+    res.setHeader('Access-Control-Allow-Origin', '*');  // CORS headers
+    res.setHeader('Content-Type', 'text/vtt');  // Set the content type as VTT
+    response.data.pipe(res);  // Pipe the data to the response
+  } catch (err) {
+    console.error('Proxy error:', err);
+    res.status(500).send('Error while fetching the subtitle');
   }
-});
-
-app.listen(PORT, () => {
-  console.log(`Proxy running on http://localhost:${PORT}`);
-});
+}
