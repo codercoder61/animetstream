@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 export default async function handler(req, res) {
-  const { url } = req.query;  // Get the URL from query parameters
+  const { url } = req.url;  // Get the URL from query parameters
   if (!url) {
     return res.status(400).send('Missing URL parameter');
   }
