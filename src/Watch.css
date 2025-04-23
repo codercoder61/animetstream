@@ -8,7 +8,7 @@
   display: block !important;
 }
 .containerr video{
-    width:90%;
+    width:100%;
     aspect-ratio: 16/9;
     text-align: center;
     margin: auto;
