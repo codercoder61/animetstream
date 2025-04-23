@@ -1,17 +1,20 @@
 import React ,{forwardRef,useState,useEffect,useRef} from 'react'
 import { Link, useParams } from 'react-router-dom';
-import Plyr from 'plyr';
+//import Plyr from 'plyr';
 import axios from 'axios'
 import './Watch.css';
 import Nav from './Nav'
 import Cookies from 'js-cookie';
 import Hls from 'hls.js';
-
+//import videojs from 'video.js';
+//import 'video.js/dist/video-js.css';
 const pageSize = 10; // Number of items per page
 
 const Watch = forwardRef((props, ref) => {
-
+const [tracks,setTracks]=useState([])
 const track = useRef(null);
+  //const player = videojs('my-video');
+  const playerRef = useRef(null);
 
 	const fetchEpisodeSources = async (episodeId) => {
 	setSpinner(true)
@@ -22,12 +25,12 @@ const response2 = await axios.post('https://proxy-production-ddb5.up.railway.app
 
 console.log(response2);
       const videoUrl = "https://hianimeproxy-production.up.railway.app/m3u8-proxy?url=" + response2.data.content.data.sources[0].url;
-		const encodedURL = encodeURIComponent(response2.data.content.data.tracks[0].file);
-const proxyURL = `/api/subtitle?url=${encodedURL}`;
+	//pl//
 
-track.current.src = proxyURL
-
+setTracks(response2.data.content.data.tracks)
+//
 		
+    
       if (Hls.isSupported()) {
         let hls = new Hls();
         hls.loadSource(videoUrl);
@@ -54,7 +57,9 @@ let res
   let { animeId } = useParams();
         Cookies.set('lastWatchedAnime', animeId);
   //const videoRef = useRef(null);
-const player = new Plyr('#player');
+//const player = new Plyr('#player', {
+  //      captions: {active:true, update: true},
+    //});
 
   const [animeid,setAnimeId] = useState(0)
   const defaultOptions = {};
@@ -126,56 +131,78 @@ const player = new Plyr('#player');
 
 
   useEffect(() => {
-    let hls
+    let isMounted = true;
+    let hls;
+  
     const fetchEpisodes = async () => {
       try {
-        const response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-alpha-indol.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
-        //console.log(response);
-        const episodeData = response.data.data.episodes;
+        const episodesRes = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-alpha-indol.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
+        const episodeData = episodesRes?.data?.data?.episodes || [];
+  
+        if (!isMounted || episodeData.length === 0) return;
+  
         setEpisodes(episodeData);
         setTotalEpisodes(episodeData.length);
-
-        // Fetch episode sources (post request)
-        
-const response2 = await axios.post('https://proxy-production-ddb5.up.railway.app/fetch-url', {url:`https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeData[0].episodeId}&server=hd-1&category=sub`});
-        console.log(response2);
-
-        const videoUrl = "https://hianimeproxy-production.up.railway.app/m3u8-proxy?url=" + response2.data.content.data.sources[0].url;
-        //console.log("Video URL: ", videoUrl);
-const encodedURL = encodeURIComponent(response2.data.content.data.tracks[0].file);
-const proxyURL = `/api/subtitle?url=${encodedURL}`;
-
-track.current.src = proxyURL
-
+  
+        const episodeId = episodeData[0].episodeId;
+  
+        const sourceRes = await axios.post('https://proxy-production-ddb5.up.railway.app/fetch-url', {
+          url: `https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub`
+        });
+  
+        const sources = sourceRes?.data?.content?.data?.sources || [];
+        const tracks = sourceRes?.data?.content?.data?.tracks || [];
+  
+        if (!isMounted || sources.length === 0) return;
+  
+        const videoUrl = "https://hianimeproxy-production.up.railway.app/m3u8-proxy?url=" + sources[0].url;
+  
+        // Initialize player if not already
+        //
+  
+        // Handle subtitles
+        setTracks(tracks);
+  
+       //
+  
+        // HLS support
         if (Hls.isSupported()) {
           hls = new Hls();
           hlsRef.current = hls;
           hls.loadSource(videoUrl);
           hls.attachMedia(videoRef.current);
-          setSpinner(false);
         } else {
-          // Fallback to native video if HLS is not supported
           if (videoRef.current) {
-            videoRef.current.style.display = "block";
             videoRef.current.src = videoUrl;
-            videoRef.current.play().catch(err => {
-              console.error("Error trying to play the video (native):", err);
-            });
-            setSpinner(false);
+            videoRef.current.play().catch(err =>
+              console.error("Native video play error:", err)
+            );
           }
         }
-      } catch (error) {
-        console.error('Error fetching episodes or video sources:', error);
+  
+        setSpinner(false);
+  
+      } catch (err) {
+        console.error('Error fetching episodes or video sources:', err);
+        if (isMounted) setSpinner(false);
       }
     };
-
+  
     fetchEpisodes();
-
-    // Cleanup: Destroy HLS instance if present when the component unmounts
+  
     return () => {
-      hls.destroy();
+      isMounted = false;
+  
+      if (playerRef.current) {
+        playerRef.current.dispose();
+        playerRef.current = null;
+      }
+      if (hls) {
+        hls.destroy();
+      }
     };
-  }, [animeId]); // Dependency array includes animeId
+  }, [animeId]);
+  
   useEffect(() => {
     if (totalEpisodes > 0) {
             if(currentPage<1){
@@ -197,9 +224,9 @@ track.current.src = proxyURL
       setcurrentItems(episodes.slice(startIndex,endIndex))
     }
   }, [totalEpisodes,animeId,currentPage,startIndex,endIndex]);
-  useEffect(() => {
-    //console.log(episodeId)
-  }, [episodeId]);
+  useEffect(()=>{
+    console.log('Subtitle tracks:', tracks);
+  },[tracks])
 
 
 
@@ -220,20 +247,27 @@ track.current.src = proxyURL
   style={{cursor:'pointer',color:'white',position:'absolute',right:'10px',bottom:'8px',fontSize:'20px'}} onClick={handleClick}>X</span></span>
   </div>}
   <div className="containerr">
+      
+<video 
+    controls
+    preload="auto"
+    src=""  
+    ref={videoRef}
+>
+{tracks && tracks.map((track,index)=>{
+  return (
+    <track 
+    key={index}
+    kind= 'subtitles'
+    src= {`/api/subtitle?url=${encodeURIComponent(track.file)}`}
+    label={track.label}
+    default={index === 0}  // make the first one default
+    />
+  )
+})}
+</video>
+    
 
-         
-
-	  <video src="" id="player" ref={videoRef} controls>
-	  <track
-        src=""
-ref={track}
-        kind="subtitles"
-        srcLang="en"
-        label="English"
-        default
-      />
-	</video>
-         
           <div ref={spinnerRef} className="spinner-container">
             <div className="spinner"></div>
           </div>
@@ -273,3 +307,5 @@ ref={track}
 })
 
 export default Watch
+
+
