@@ -1,0 +1,58 @@
+
+nav{
+    display:flex;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0);
+    padding: 10px;
+    border-bottom:4px solid rgb(41, 36, 36);
+}
+
+nav> span{
+    background-color: rgb(29, 27, 27);
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 5px 15px;
+    border: 2px solid #666565;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color:#fff;
+}
+nav> span:hover{
+    color:#dddada;
+    cursor:pointer;
+    background-color:rgb(41, 36, 36,0.8) ;
+}
+nav i,nav div i {
+    font-size: 20px;
+    background-color: black;
+    padding: 5px;
+    color:#fff;
+}
+
+#user{
+    background-color: white;
+    color:black;
+    padding: 5px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#glass{
+    background-color: #222121;
+    margin-right: 5px;
+    border-radius: 50%;
+    padding: 7px;
+    font-size: 15px;
+
+}
+
+#glass:hover{
+    cursor: pointer;
+    background-color: #222121;
+    opacity: 0.8;
+}
+
+#bars:hover{
+    cursor: pointer;
+  }

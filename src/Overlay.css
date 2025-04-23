@@ -1,0 +1,138 @@
+
+
+  .openBtn {
+    background: #f1f1f1;
+    border: none;
+    padding: 10px 15px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .openBtn:hover {
+    background: #bbb;
+  }
+  
+  .overlay {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    text-align: left;
+    overflow-y: scroll;
+    z-index:1001;
+  }
+  #results{
+        overflow: auto;
+        /* background-color: red; */
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        width:90%;
+        margin: 60px auto;
+  }
+  #results div{
+    padding: 20px;
+  }
+  #results div:hover{
+    background-color: rgba(0,0,0, 0.3);
+    cursor: pointer;
+  }
+  .overlay-content {
+    position: relative;
+    top: 5%;
+    width: 80%;
+    text-align: center;
+    margin-top: 30px;
+    margin:0 auto 120px;
+  }
+
+  
+
+  #myOverlay div img{
+    margin-right:20px;
+    /* margin-left: 100px; */
+  }
+  #myOverlay div span{
+    position: relative;
+    bottom:50px;
+    margin-right:20px;
+    color:white;
+
+    font-size: 15px;
+  }
+
+  
+  .overlay .closebtn {
+    position: absolute;
+    top: 5px;
+    right:20px;
+    font-size: 60px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .overlay .closebtn:hover {
+    color: #ccc;
+  }
+  
+  .overlay input[type=text] {
+    padding: 15px;
+    font-size: 17px;
+    border: none;
+    float: left;
+    width: 80%;
+    background: white;
+  }
+  
+  .overlay input[type=text]:hover {
+    background: #f1f1f1;
+  }
+  
+  .overlay button {
+    float: left;
+    width: 20%;
+    padding: 15px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .overlay button:hover {
+    background: #bbb;
+  }
+
+  input[type=text], input[type=password] {
+    width: 60%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+  
+  /* Add a background color when the inputs get focus */
+  input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  /* Set a style for all buttons */
+  
+  
+  
+  /* Extra styles for the cancel button */
+  .cancelbtn {
+    padding: 14px 20px;
+    background-color: #f44336;
+  }
+  
+  /* Float cancel and signup buttons and add an equal width */
+  .cancelbtn, .signupbtn {
+    float: left;
+    width: 50%;
+  }
+  
