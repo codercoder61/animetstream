@@ -32,7 +32,13 @@ setTracks(response2.data.content.data.tracks)
 		
     
       if (Hls.isSupported()) {
-        let hls = new Hls();
+        let hls = new Hls({
+  enableWorker: true,
+  lowLatencyMode: true,
+  maxBufferHole: 0.5, // default is 0.5s, tweak if needed
+  maxSeekHole: 2,
+  liveSyncDuration: 2,
+});
         hls.loadSource(videoUrl);
         hls.attachMedia(videoRef.current);
 	hls.on(Hls.Events.ERROR, function (event, data) {
@@ -170,7 +176,13 @@ let res
   
         // HLS support
         if (Hls.isSupported()) {
-          hls = new Hls();
+          hls = new Hls({
+  enableWorker: true,
+  lowLatencyMode: true,
+  maxBufferHole: 0.5, // default is 0.5s, tweak if needed
+  maxSeekHole: 2,
+  liveSyncDuration: 2,
+});
           hlsRef.current = hls;
           hls.loadSource(videoUrl);
           hls.attachMedia(videoRef.current);
