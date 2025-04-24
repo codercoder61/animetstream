@@ -35,6 +35,9 @@ setTracks(response2.data.content.data.tracks)
         let hls = new Hls();
         hls.loadSource(videoUrl);
         hls.attachMedia(videoRef.current);
+	hls.on(Hls.Events.ERROR, function (event, data) {
+	console.error('HLS error', data);
+	});
         setSpinner(false);
         
       } else {
@@ -171,6 +174,9 @@ let res
           hlsRef.current = hls;
           hls.loadSource(videoUrl);
           hls.attachMedia(videoRef.current);
+	  hls.on(Hls.Events.ERROR, function (event, data) {
+	  	console.error('HLS error', data);
+	  });
         } else {
           if (videoRef.current) {
             videoRef.current.src = videoUrl;
