@@ -39,7 +39,7 @@ fetchSearchResults()
         {(query !== "" && animes && animes!=[] && animes.length > 0 )? (
               animes.map(anime => (
                 <Link key={anime.id} onClick={()=>{props.onclick();props.spinnertrue()}} style={{textDecoration:'none'}} to={`/Watch/${anime.id}`}><div>
-                  <img src={anime.poster} style={{witdh:'80px',height:'120px',borderRadius:'50%',objectFit:'cover'}} alt={anime.name}/>
+                  <img src={anime.poster} style={{borderRadius:'50%',objectFit:'cover'}} alt={anime.name}/>
                   <span>{anime.name.length>20?anime.name.slice(0,19)+'...':anime.name}</span>
                 </div></Link>
               ))
