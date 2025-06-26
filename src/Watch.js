@@ -21,7 +21,14 @@ const track = useRef(null);
 	//console.log(episodeId)	
 	try {
    
-const response2 = await axios.post('https://soc-net.info/proxy.php',{url:`https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub`});
+const response2 = await axios.post('https://soc-net.info/proxy.php', {
+  url: `https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub`
+}, {
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
 
 console.log(response2);
       const videoUrl = "https://soc-net.info/proxy_vtt.php?url=" + response2.data.content.data.sources[0].url;
@@ -155,9 +162,12 @@ let res
   
         const episodeId = episodeData[0].episodeId;
   
-        const sourceRes = await axios.post('https://soc-net.info/proxy.php', {
-          url: `https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub`
-        });
+     
+	      const sourceRes = await axios.post(
+  'https://soc-net.info/proxy.php',
+  { url: `https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub` },
+  { headers: { 'Content-Type': 'application/json' } }
+);
   
         const sources = sourceRes?.data?.content?.data?.sources || [];
         const tracks = sourceRes?.data?.content?.data?.tracks || [];
