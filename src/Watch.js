@@ -164,7 +164,7 @@ let res
 			});
         
         const episodeData = respons2?.data?.content?.providerEpisodes || [];
-  		console.log(episodesRes)
+  		//console.log(episodesRes)
         if (!isMounted || episodeData.length === 0) return;
   
         setEpisodes(respons2.data.content.providerEpisodes);
