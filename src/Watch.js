@@ -15,8 +15,8 @@ const Watch = forwardRef((props, ref) => {
     captions: { active: true, update: true }
   });
 	var trackNode = player.captions.currentTrackNode;
-if(!trackNode || !trackNode.activeCues) return;
-trackNode.mode = 'showing';
+if(!trackNode || !trackNode.activeCues) trackNode.mode = 'showing';
+
 
 const [tracks,setTracks]=useState([])
 const track = useRef(null);
