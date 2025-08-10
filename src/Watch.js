@@ -14,6 +14,9 @@ const Watch = forwardRef((props, ref) => {
 	const player = new Plyr('#player', {
     captions: { active: true, update: true }
   });
+	var trackNode = player.captions.currentTrackNode;
+if(!trackNode || !trackNode.activeCues) return;
+trackNode.mode = 'showing';
 
 const [tracks,setTracks]=useState([])
 const track = useRef(null);
