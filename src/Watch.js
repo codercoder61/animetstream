@@ -33,7 +33,6 @@ const sourceRes = await axios.post(
         const tracks = sourceRes?.data?.content?.data?.subtitles || [];
 
 
-console.log(response2);
       const videoUrl = "https://zuhaw-proxy.fly.dev/?url="+sources[0].url;
 	//pl//
 
