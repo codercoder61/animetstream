@@ -20,7 +20,9 @@ const track = useRef(null);
 	setSpinner(true)
 	//console.log(episodeId)	
 	try {
-   
+
+
+		
 const response2 = await axios.post('https://soc-net.info/proxy.php/', {
   url: `https://aniwatch-gilt.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub`
 }, {
@@ -71,6 +73,14 @@ const hlsRef = useRef(null);
 let response 
 let res
   let { animeId } = useParams();
+	   const respons2 = await axios.post('https://soc-net.info/proxy.php/', {
+  url: `https://hakai-api.vercel.app/api/anilist/provider-episodes/${animeId}`
+}, {
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+	console.log(respons2)
         Cookies.set('lastWatchedAnime', animeId);
   //const videoRef = useRef(null);
 //const player = new Plyr('#player', {
@@ -114,8 +124,8 @@ let res
     async function fetchData() {
       res = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://hakai-api.vercel.app/api/anilist/info/${animeId}`);
     console.log(res)
-    setPoster(res.data.data.anime.info.poster)
-    setTitle(res.data.data.anime.info.name)
+    setPoster(res.data.data.image)
+    setTitle(res.data.data.title.english ||res.data.data.title.native ||res.data.data.title.romaji)
     setEpisodeNumber(1)
     }
     fetchData();
