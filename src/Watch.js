@@ -113,7 +113,7 @@ let res
   useEffect(() => {
     async function fetchData() {
       res = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://aniwatch-gilt.vercel.app/api/v2/hianime/anime/${animeId}`);
-    //console.log(res)
+    console.log(res)
     setPoster(res.data.data.anime.info.poster)
     setTitle(res.data.data.anime.info.name)
     setEpisodeNumber(1)
@@ -154,7 +154,7 @@ let res
       try {
         const episodesRes = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://aniwatch-gilt.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
         const episodeData = episodesRes?.data?.data?.episodes || [];
-  
+  		console.log(episodesRes)
         if (!isMounted || episodeData.length === 0) return;
   
         setEpisodes(episodeData);
@@ -168,7 +168,7 @@ let res
   { url: `https://aniwatch-gilt.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub` },
   { headers: { 'Content-Type': 'application/json' } }
 );
-  
+  console.log(sourceRes)
         const sources = sourceRes?.data?.content?.data?.sources || [];
         const tracks = sourceRes?.data?.content?.data?.tracks || [];
   
