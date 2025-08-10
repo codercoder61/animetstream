@@ -40,7 +40,14 @@ fetchSearchResults()
               animes.map(anime => (
                 <Link key={anime.anilistId} onClick={()=>{props.onclick();props.spinnertrue()}} style={{textDecoration:'none'}} to={`/Watch/${anime.anilistId}`}><div>
                   <img src={anime.image} style={{borderRadius:'50%',objectFit:'cover'}} alt={anime.title.english || anime.title.romaji|| anime.title.native}/>
-                  <span>{anime.title.english.length>20 || anime.title.romaji.length>20 || anime.title.english.native>20?anime.title.english.slice(0,19)||anime.title.romaji.slice(0,19)||anime.title.native.slice(0,19)+'...':anime.title.english ||anime.title.romaji||anime.title.native}</span>
+                  <span>
+  {(() => {
+    const { english, romaji, native } = anime.title;
+    const title = english || romaji || native || "";
+    return title.length > 20 ? title.slice(0, 19) + "..." : title;
+  })()}
+</span>
+
                 </div></Link>
               ))
             ) : (
