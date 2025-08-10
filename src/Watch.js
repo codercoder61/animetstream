@@ -299,6 +299,7 @@ let res
     preload="auto"
     src=""  
     ref={videoRef}
+	playsinline 
 >
 {tracks && tracks.map((track,index)=>{
   return (
