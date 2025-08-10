@@ -29,10 +29,10 @@ function Block(props) {
   };
 
   const handleClick3 = ()=>{
-        fetchData('https://proxy-ryan.vercel.app/cors?url=https://anime-alpha-indol.vercel.app/api/v2/hianime/home')
+        fetchData('https://proxy-ryan.vercel.app/cors?url=https://hakai-api.vercel.app/api/anilist/top-anime')
   }
   const handleClick4 = ()=>{
-        fetchData2('https://proxy-ryan.vercel.app/cors?url=https://anime-alpha-indol.vercel.app/api/v2/hianime/home')
+        fetchData2('https://proxy-ryan.vercel.app/cors?url=https://hakai-api.vercel.app/api/anilist/top-airing')
   }
   useEffect(() => {
 
