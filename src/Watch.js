@@ -11,7 +11,9 @@ import Hls from 'hls.js';
 const pageSize = 10; // Number of items per page
 
 const Watch = forwardRef((props, ref) => {
-	const player = new Plyr('#player');
+	const player = new Plyr('#player', {
+    captions: { active: true, update: true }
+  });
 
 const [tracks,setTracks]=useState([])
 const track = useRef(null);
