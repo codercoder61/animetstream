@@ -33,7 +33,7 @@ const plusSlides=(n) =>{
       try {
         const response = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://hakai-api.vercel.app/api/anilist/most-popular`);
         console.log(response)
-        setAnimes(response.data.data.mostPopularAnimes || []);
+        setAnimes(response.data.data || []);
       } catch (error) {
         alert('Error fetching data:', error);
       }
@@ -60,8 +60,8 @@ const plusSlides=(n) =>{
         {animep.map((anime,index) => (
         <Link key={anime.id} to={`/Watch/${anime.id}`}><div  ref={(ref) => (slideRefs.current[index] = ref)} className="mySlides fade">
           <div className="numbertext">{index+1} / {animep.length}</div>
-          <img src={anime.poster} style={{ cursor:'pointer', width: '100%' ,height:'300px',objectFit:'cover'}} alt={anime.name} />
-          <div className="text">{anime.name}</div>
+          <img src={anime.bannerImage} style={{ cursor:'pointer', width: '100%' ,height:'300px',objectFit:'cover'}} alt={anime.name} />
+          <div className="text">{anime.title.english}</div>
         </div></Link>
       ))}
       <a className="prev" onClick={()=>plusSlides(-1)}>❮</a>
