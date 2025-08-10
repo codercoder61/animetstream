@@ -22,7 +22,7 @@ const track = useRef(null);
 	try {
    
 const response2 = await axios.post('https://proxy-production-71793.up.railway.app/', {
-  url: `https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub`
+  url: `https://aniwatch-gilt.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub`
 }, {
   headers: {
     'Content-Type': 'application/json'
@@ -152,7 +152,7 @@ let res
   
     const fetchEpisodes = async () => {
       try {
-        const episodesRes = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-alpha-indol.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
+        const episodesRes = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://aniwatch-gilt.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
         const episodeData = episodesRes?.data?.data?.episodes || [];
   
         if (!isMounted || episodeData.length === 0) return;
