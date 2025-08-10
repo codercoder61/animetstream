@@ -288,6 +288,7 @@ let res
       
 <video 
     controls
+	id="player"
     preload="auto"
     src=""  
     ref={videoRef}
