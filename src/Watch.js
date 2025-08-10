@@ -31,7 +31,7 @@ const response2 = await axios.post('https://soc-net.info/proxy.php/', {
 
 
 console.log(response2);
-      const videoUrl = response2.data.content.data.sources[0].url;
+      const videoUrl = "https://m3u8-proxy-cors-indol.vercel.app/cors?url="+response2.data.content.data.sources[0].url;
 	//pl//
 
 setTracks(response2.data.content.data.tracks)
@@ -174,7 +174,7 @@ let res
   
         if (!isMounted || sources.length === 0) return;
   
-        const videoUrl = sources[0].url;
+        const videoUrl = "https://m3u8-proxy-cors-indol.vercel.app/cors?url="sources[0].url;
   
         // Initialize player if not already
         //
