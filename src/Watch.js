@@ -73,7 +73,9 @@ const hlsRef = useRef(null);
 let response 
 let res
   let { animeId } = useParams();
-	   const respons2 = axios.post('https://soc-net.info/proxy.php/', {
+	const fetchEpisodes =  async () =>{
+		
+	   const respons2 = await axios.post('https://soc-net.info/proxy.php/', {
   url: `https://hakai-api.vercel.app/api/anilist/provider-episodes/${animeId}`
 }, {
   headers: {
@@ -81,6 +83,11 @@ let res
   }
 });
 	console.log(respons2)
+	}
+
+	useEffect(()=>{
+		fetchEpisodes()
+	},[])
         Cookies.set('lastWatchedAnime', animeId);
   //const videoRef = useRef(null);
 //const player = new Plyr('#player', {
