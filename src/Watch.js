@@ -165,7 +165,7 @@ let res
      
 	      const sourceRes = await axios.post(
   'https://proxy-production-71793.up.railway.app/',
-  { url: `https://anime-alpha-indol.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub` },
+  { url: `https://aniwatch-gilt.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub` },
   { headers: { 'Content-Type': 'application/json' } }
 );
   
