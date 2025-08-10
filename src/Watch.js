@@ -1,6 +1,6 @@
 import React ,{forwardRef,useState,useEffect,useRef} from 'react'
 import { Link, useParams } from 'react-router-dom';
-//import Plyr from 'plyr';
+import Plyr from 'plyr';
 import axios from 'axios'
 import './Watch.css';
 import Nav from './Nav'
@@ -11,6 +11,8 @@ import Hls from 'hls.js';
 const pageSize = 10; // Number of items per page
 
 const Watch = forwardRef((props, ref) => {
+	const player = new Plyr('#player');
+
 const [tracks,setTracks]=useState([])
 const track = useRef(null);
   //const player = videojs('my-video');
