@@ -287,7 +287,7 @@ let res
     <track 
     key={index}
     kind= 'subtitles'
-    src= {`/api/subtitle?url=${encodeURIComponent(track.file)}`}
+    src= {`/api/subtitle?url=${encodeURIComponent(track)}`}
     label={track.label}
     default={index === 0}  // make the first one default
     />
@@ -317,7 +317,7 @@ let res
     {
   currentItems.length > 0 ? (
     currentItems.map((episode) => (
-      <div key={episode.id} onClick={()=>{fetchEpisodeSources(episode.episodeId);setEpisodeId(episode.id);setEpisodeNumber(episode.number);}} style={{display:'flex',flexDirection:'column'}}>
+      <div key={episode.number} onClick={()=>{fetchEpisodeSources(episode.episodeId);setEpisodeId(episode.episodeId);setEpisodeNumber(episode.number);}} style={{display:'flex',flexDirection:'column'}}>
       <img style={{cursor:'pointer',borderRadius:'10px',marginRight:'15px',width:'150px',aspectRatio:'16/9',objectFit:'cover'}} src={poster} alt={episode.title ? episode.title:""} /><span style={{alignSelf:'start',color:'white'}}>{episode.title ? (episode.title.length>19 ? episode.title.slice(0, 16)+'...':episode.title) : "Episode "+episode.number}</span>
 	</div>
     ))
