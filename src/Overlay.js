@@ -19,7 +19,7 @@ function Overlay(props) {
 const response2 = await axios.post('https://soc-net.info/proxy.php/',{url:`https://hakai-api.vercel.app/api/anilist/search?q=${query}`});
 //console.log(response2.data.data.animes);
         console.log(response2)
-setAnimes(response2.data.data)
+setAnimes(response2.data.content.data)
 } catch (error) {
   console.error('Error fetching video sources:', error);
 }}
@@ -38,9 +38,9 @@ fetchSearchResults()
         <div id="results">
         {(query !== "" && animes && animes!=[] && animes.length > 0 )? (
               animes.map(anime => (
-                <Link key={anime.id} onClick={()=>{props.onclick();props.spinnertrue()}} style={{textDecoration:'none'}} to={`/Watch/${anime.id}`}><div>
-                  <img src={anime.poster} style={{borderRadius:'50%',objectFit:'cover'}} alt={anime.name}/>
-                  <span>{anime.name.length>20?anime.name.slice(0,19)+'...':anime.name}</span>
+                <Link key={anime.anilistId} onClick={()=>{props.onclick();props.spinnertrue()}} style={{textDecoration:'none'}} to={`/Watch/${anime.anilistId}`}><div>
+                  <img src={anime.image} style={{borderRadius:'50%',objectFit:'cover'}} alt={anime.title.english || anime.title.romaji|| anime.title.native}/>
+                  <span>{anime.title.english.length>20 || anime.title.romaji.length>20 || anime.title.english.native>20?anime.title.english.slice(0,19)||anime.title.romaji.slice(0,19)||anime.title.native.slice(0,19)+'...':anime.title.english ||anime.title.romaji||anime.title.native}</span>
                 </div></Link>
               ))
             ) : (
