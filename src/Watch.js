@@ -23,20 +23,21 @@ const track = useRef(null);
 
 
 		
-const response2 = await axios.post('https://soc-net.info/proxy.php/', {
-  url: `https://aniwatch-gilt.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub`
-}, {
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
+const sourceRes = await axios.post(
+  'https://soc-net.info/proxy.php/',
+  { url: `https://hakai-api.vercel.app/api/hianime/watch/${episodeId}?category=sub` },
+  { headers: { 'Content-Type': 'application/json' } }
+);
+  console.log(sourceRes)
+        const sources = sourceRes?.data?.content?.data?.sources || [];
+        const tracks = sourceRes?.data?.content?.data?.subtitles || [];
 
 
 console.log(response2);
-      const videoUrl = "https://zuhaw-proxy.fly.dev/?url="+response2.data.content.data.sources[0].url;
+      const videoUrl = "https://zuhaw-proxy.fly.dev/?url="+sources[0].url;
 	//pl//
 
-setTracks(response2.data.content.data.tracks)
+setTracks(tracks)
 //
 		
     
@@ -180,7 +181,7 @@ let res
 );
   console.log(sourceRes)
         const sources = sourceRes?.data?.content?.data?.sources || [];
-        const tracks = sourceRes?.data?.content?.data?.tracks || [];
+        const tracks = sourceRes?.data?.content?.data?.subtitles || [];
   
         if (!isMounted || sources.length === 0) return;
   
@@ -263,8 +264,8 @@ let res
     }
   }, [totalEpisodes,animeId,currentPage,startIndex,endIndex]);
   useEffect(()=>{
-    console.log('Subtitle tracks:', tracks);
-  },[tracks])
+    console.log('Subtitle :', );
+  },[])
 
 
 
