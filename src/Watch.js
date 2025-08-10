@@ -73,21 +73,7 @@ const hlsRef = useRef(null);
 let response 
 let res
   let { animeId } = useParams();
-	const fetchEpisodes =  async () =>{
-		
-	   const respons2 = await axios.post('https://soc-net.info/proxy.php/', {
-  url: `https://hakai-api.vercel.app/api/anilist/provider-episodes/${animeId}`
-}, {
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
-	console.log(respons2)
-	}
-
-	useEffect(()=>{
-		fetchEpisodes()
-	},[])
+	
         Cookies.set('lastWatchedAnime', animeId);
   //const videoRef = useRef(null);
 //const player = new Plyr('#player', {
@@ -169,20 +155,27 @@ let res
   
     const fetchEpisodes = async () => {
       try {
-        const episodesRes = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://aniwatch-gilt.vercel.app/api/v2/hianime/anime/${animeId}/episodes`);
-        const episodeData = episodesRes?.data?.data?.episodes || [];
+		  const respons2 = await axios.post('https://soc-net.info/proxy.php/', {
+			  url: `https://hakai-api.vercel.app/api/anilist/provider-episodes/${animeId}`
+			}, {
+			  headers: {
+			    'Content-Type': 'application/json'
+			  }
+			});
+        
+        const episodeData = respons2?.data?.content?.providerEpisodes || [];
   		console.log(episodesRes)
         if (!isMounted || episodeData.length === 0) return;
   
-        setEpisodes(episodeData);
-        setTotalEpisodes(episodeData.length);
+        setEpisodes(respons2.data.content.providerEpisodes);
+        setTotalEpisodes(respons2.data.content.providerEpisodes.length);
   
         const episodeId = episodeData[0].episodeId;
   
      
 	      const sourceRes = await axios.post(
   'https://soc-net.info/proxy.php/',
-  { url: `https://aniwatch-gilt.vercel.app/api/v2/hianime/episode/sources?animeEpisodeId=${episodeId}&server=hd-1&category=sub` },
+  { url: `https://hakai-api.vercel.app/api/hianime/watch/${episodeId}?category=sub` },
   { headers: { 'Content-Type': 'application/json' } }
 );
   console.log(sourceRes)
