@@ -7,7 +7,7 @@ function Block(props) {
   const fetchData = async (url) => {
     await axios.get(url).then(dataa=>{
       console.log(dataa)
-        setData(dataa.data.data.mostFavoriteAnimes);
+        setData(dataa.data.data);
 
     }).catch(error=>{
         console.log(error)
@@ -19,7 +19,7 @@ function Block(props) {
   const fetchData2 = async (url) => {
     await axios.get(url).then(dataa=>{
       console.log(dataa)
-        setData(dataa.data.data.trendingAnimes);
+        setData(dataa.data.data);
 
     }).catch(error=>{
         console.log(error)
@@ -37,7 +37,7 @@ function Block(props) {
   useEffect(() => {
 
 
-    fetchData('https://proxy-ryan.vercel.app/cors?url=https://anime-alpha-indol.vercel.app/api/v2/hianime/home')
+    fetchData('https://proxy-ryan.vercel.app/cors?url=https://hakai-api.vercel.app/api/anilist/top-anime')
     
     
   }, []);
@@ -52,9 +52,9 @@ function Block(props) {
         <div id="fetched">
                     {
             data.map((anime, index) => (
-                <Link key={index} style={{textDecoration:'none'}} to={`/Watch/${anime.id}`}><div style={{display:'flex',flexDirection:'column',textAlign:'center'}} >
-                <img src={anime.poster} alt={anime.name} />
-<span>{(anime.name && anime.name.length>30)?anime.name.slice(0,30)+"...":anime.name}</span>
+                <Link key={index} style={{textDecoration:'none'}} to={`/Watch/${anime.anilistId}`}><div style={{display:'flex',flexDirection:'column',textAlign:'center'}} >
+                <img src={anime.image} alt={anime.title.english} />
+<span>{(anime.title.english && anime.title.english.length>30)?anime.title.english.slice(0,30)+"...":anime.title.english}</span>
   
 
                 </div></Link>
