@@ -4,7 +4,6 @@ export default async function handler(req, res) {
   // Basic validation: Only allow .vtt files from megastatics.com
   if (
     !subtitleUrl ||
-    !subtitleUrl.startsWith('https://s.megastatics.com/') ||
     !subtitleUrl.endsWith('.vtt')
   ) {
     return res.status(400).json({ error: 'Invalid or missing subtitle URL' });
