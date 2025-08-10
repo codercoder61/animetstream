@@ -16,10 +16,10 @@ function Overlay(props) {
       	
       try {
    
-const response2 = await axios.post('https://soc-net.info/proxy.php/',{url:`https://aniwatch-gilt.vercel.app/api/v2/hianime/search?q=${query}`});
+const response2 = await axios.post('https://soc-net.info/proxy.php/',{url:`https://hakai-api.vercel.app//api/anilist/search?q=${query}`});
 //console.log(response2.data.data.animes);
         console.log(response2)
-setAnimes(response2.data.content.data.animes)
+setAnimes(response2.data.data)
 } catch (error) {
   console.error('Error fetching video sources:', error);
 }}
