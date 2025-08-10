@@ -14,8 +14,18 @@ const Watch = forwardRef((props, ref) => {
 	const player = new Plyr('#player', {
     captions: { active: true, update: true }
   });
-	var trackNode = player.captions.currentTrackNode;
-if(!trackNode || !trackNode.activeCues) trackNode.mode = 'showing';
+	const trackNode = player.captions.currentTrackNode; // <track> element
+
+if (trackNode) {
+  // Find the matching TextTrack
+  const textTrack = Array.from(player.textTracks).find(
+    t => t.language === trackNode.srclang
+  );
+
+  if (textTrack && (!textTrack.activeCues || textTrack.mode !== 'showing')) {
+    textTrack.mode = 'showing';
+  }
+}
 
 
 const [tracks,setTracks]=useState([])
