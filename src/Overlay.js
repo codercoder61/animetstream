@@ -16,7 +16,7 @@ function Overlay(props) {
       	
       try {
    
-const response2 = await axios.post('https://soc-net.info/proxy.php/',{url:`https://hakai-api.vercel.app/api/anilist/search?q=${query}`});
+const response2 = await axios.post('https://soc-net.info/proxy.php/',{url:`https://hakai-api.vercel.app/api/anilist/search?q=${encodeURIComponent(query)}`});
 //console.log(response2.data.data.animes);
         console.log(response2)
 setAnimes(response2.data.content.data)
