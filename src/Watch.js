@@ -112,7 +112,7 @@ let res
   },[isLoading])
   useEffect(() => {
     async function fetchData() {
-      res = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://anime-alpha-indol.vercel.app/api/v2/hianime/anime/${animeId}`);
+      res = await axios.get(`https://proxy-ryan.vercel.app/cors?url=https://aniwatch-gilt.vercel.app/api/v2/hianime/anime/${animeId}`);
     //console.log(res)
     setPoster(res.data.data.anime.info.poster)
     setTitle(res.data.data.anime.info.name)
