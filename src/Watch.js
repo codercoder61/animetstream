@@ -174,7 +174,7 @@ let res
   
         if (!isMounted || sources.length === 0) return;
   
-        const videoUrl = "https://m3u8-proxy-cors-indol.vercel.app/cors?url="sources[0].url;
+        const videoUrl = "https://m3u8-proxy-cors-indol.vercel.app/cors?url="+sources[0].url;
   
         // Initialize player if not already
         //
