@@ -10,7 +10,7 @@ import Hls from 'hls.js';
 //import 'video.js/dist/video-js.css';
 const pageSize = 10; // Number of items per page
 
-const Watch = forwardRef(async (props, ref) => {
+const Watch = forwardRef((props, ref) => {
 const [tracks,setTracks]=useState([])
 const track = useRef(null);
   //const player = videojs('my-video');
@@ -73,7 +73,7 @@ const hlsRef = useRef(null);
 let response 
 let res
   let { animeId } = useParams();
-	   const respons2 = await axios.post('https://soc-net.info/proxy.php/', {
+	   const respons2 = axios.post('https://soc-net.info/proxy.php/', {
   url: `https://hakai-api.vercel.app/api/anilist/provider-episodes/${animeId}`
 }, {
   headers: {
