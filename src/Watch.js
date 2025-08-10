@@ -10,7 +10,7 @@ import Hls from 'hls.js';
 //import 'video.js/dist/video-js.css';
 const pageSize = 10; // Number of items per page
 
-const Watch = forwardRef((props, ref) => {
+const Watch = forwardRef(async (props, ref) => {
 const [tracks,setTracks]=useState([])
 const track = useRef(null);
   //const player = videojs('my-video');
