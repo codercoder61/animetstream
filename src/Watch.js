@@ -299,7 +299,7 @@ let res
   return (
     <track 
     key={index}
-    kind= 'subtitles'
+    kind= 'captions'
     src= {`/api/subtitle?url=${encodeURIComponent(track.url)}`}
     label={track.lang}
     default={index === 0}  // make the first one default
