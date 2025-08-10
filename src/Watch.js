@@ -313,13 +313,14 @@ let res
 >
 {tracks && tracks.map((track,index)=>{
   return (
-    <track 
-    key={index}
-    kind= 'captions'
-    src= {`/api/subtitle?url=${encodeURIComponent(track.url)}`}
-    label={track.lang}
-    default={index === 0}  // make the first one default
-    />
+    <track
+	  key={index}
+	  kind="captions"
+	  src={`/api/subtitle?url=${encodeURIComponent(track.url)}`}
+	  label={track.lang}
+	  srclang={track.lang.toLowerCase()} // e.g. "en", "fr"
+	  default={index === 0}
+	/>
   )
 })}
 </video>
