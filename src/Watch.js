@@ -276,6 +276,7 @@ let res
       setStartIndex((currentPage - 1) * pageSize)
       
       setEndIndex(Math.min(startIndex + pageSize, totalEpisodes))
+		console.log(episodes)
       setcurrentItems(episodes.slice(startIndex,endIndex))
     }
   }, [totalEpisodes,animeId,currentPage,startIndex,endIndex]);
