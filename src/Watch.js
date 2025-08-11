@@ -348,7 +348,7 @@ let res
     {
   currentItems.length > 0 ? (
     currentItems.map((episode,index) => (
-      <div key={index} onClick={()=>{fetchEpisodeSources(episode.episodeId);setEpisodeId(episode.episodeId);setEpisodeNumber(index+1);}} style={{display:'flex',flexDirection:'column'}}>
+      <div key={index} onClick={()=>{fetchEpisodeSources(episode.episodeId);setEpisodeId(episode.episodeId);setEpisodeNumber(episode.episodeNumber);}} style={{display:'flex',flexDirection:'column'}}>
       <img style={{cursor:'pointer',borderRadius:'10px',marginRight:'15px',width:'150px',aspectRatio:'16/9',objectFit:'cover'}} src={poster} alt={episode.title ? episode.title:""} /><span style={{alignSelf:'start',color:'white'}}>{episode.title ? (episode.title.length>19 ? episode.title.slice(0, 16)+'...':episode.title) : "Episode "+episode.number}</span>
 	</div>
     ))
